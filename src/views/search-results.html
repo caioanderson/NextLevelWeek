@@ -11,39 +11,44 @@
 {% set pageId = "page-search-results" %}
 
 {% block content %}
+
     {% include "partials/page-header.html" %}
+
     <main>
-        <h4>
-            <strong>2 pontos</strong>
-            encontrados.
-        </h4>
 
-        <div class="cards">
-            <div class="card">
-                <img src="https://images.unsplash.com/photo-1528323273322-d81458248d40?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1401&q=80" alt="Colectoria">
-                <h1>Colectoria</h1>
-                <h3>Resíduos eletrônicos, lâmpadas</h3>
-                <p>Rio do Sul , Santa Catarina
-                    <br/>
-                    Gulherme Gemballa, Jardim América
-                    <br/>
-                    N° 260
+        {% if quantidade > 0 %}
+            <h4>
+                <strong>
+                    {{ quantidade }}
+                    pontos</strong>
+                encontrados.
+            </h4>
 
-                </p>
-            </div>
+            <div class="cards">
 
-            <div class="card">
-                <img src="https://images.unsplash.com/photo-1516992654410-9309d4587e94?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80" alt="Colectoria">
-                <h1>Papersider</h1>
-                <h3>Papéis e papelão</h3>
-                <p>Rio do Sul , Santa Catarina
-                    <br/>
-                    Gulherme Gemballa, Jardim América
-                    <br/>
-                    N° 260
+                {% for place in places %}
 
-                </p>
-            </div>
+                    <div class="card">
+                        <img src="{{ place.image }}" alt="Colectoria">
+                        <h1>{{ place.name }}</h1>
+                        <h3>{{ place.items }}</h3>
+                        <p>{{ place.state }},
+                            {{ place.city }}
+                            <br/>
+                            {{ place.address }}
+                            <br/>
+                            {{ place.address2 }}
+
+                        </p>
+                    </div>
+                {% endfor %}
+
+            {% else %}
+
+                <h4>
+                    <strong>Nenhum</strong> local encontrado</h4>
+
+            {% endif %}
 
         </div>
     </main>
